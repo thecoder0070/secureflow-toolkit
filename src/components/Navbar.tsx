@@ -1,0 +1,127 @@
+
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Menu, X } from 'lucide-react';
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Assessment', path: '/assessment' },
+    { name: 'Pricing', path: '#pricing' },
+  ];
+
+  return (
+    <header
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-8',
+        scrolled
+          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm'
+          : 'bg-transparent'
+      )}
+    >
+      <nav className="max-w-7xl mx-auto flex items-center justify-between">
+        <Link to="/" className="flex items-center space-x-2" onClick={closeMobileMenu}>
+          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+            <span className="text-white font-bold text-xl">SF</span>
+          </div>
+          <span className="font-semibold text-xl">SecureFlow</span>
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-1">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={cn(
+                'px-4 py-2 rounded-md font-medium transition-colors duration-200',
+                isActive(item.path)
+                  ? 'text-primary'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden md:flex items-center space-x-4">
+          <Button variant="outline" className="font-medium">
+            Log in
+          </Button>
+          <Button className="font-medium">Get Started</Button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden flex items-center"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg py-4 px-6 z-40 slide-in-right">
+          <div className="flex flex-col space-y-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  'px-4 py-3 rounded-md font-medium transition-colors duration-200',
+                  isActive(item.path)
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                )}
+                onClick={closeMobileMenu}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="pt-2 flex flex-col space-y-3">
+              <Button variant="outline" className="w-full justify-center">
+                Log in
+              </Button>
+              <Button className="w-full justify-center">
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Navbar;
