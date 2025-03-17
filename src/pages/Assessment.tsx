@@ -7,8 +7,10 @@ import { FadeIn } from '@/components/animations/FadeIn';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { ShieldCheck, BookOpen, FileText, Zap } from 'lucide-react';
+import { ShieldCheck, BookOpen, FileText, Zap, Info, CheckCircle2, Clock, FileQuestion } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Assessment = () => {
   useEffect(() => {
@@ -96,6 +98,81 @@ const Assessment = () => {
                         </div>
                       </div>
                       
+                      <Accordion type="single" collapsible className="w-full mt-6">
+                        <AccordionItem value="item-1">
+                          <AccordionTrigger>What to expect in a guided assessment</AccordionTrigger>
+                          <AccordionContent>
+                            <div className="space-y-3 p-2">
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <p className="text-sm">Initial consultation to understand your business needs and compliance goals</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <p className="text-sm">Gap analysis against your target compliance frameworks</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <p className="text-sm">Custom roadmap development with realistic timelines</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <p className="text-sm">Control implementation guidance and documentation review</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                                <p className="text-sm">Weekly check-ins with your dedicated compliance expert</p>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                        
+                        <AccordionItem value="item-2">
+                          <AccordionTrigger>Policy development assistance</AccordionTrigger>
+                          <AccordionContent>
+                            <div className="p-2">
+                              <p className="text-sm mb-3">
+                                Our guided assessment includes assistance with developing and implementing the essential security policies required for your target frameworks, including:
+                              </p>
+                              <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Information Security Policy</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Acceptable Use Policy</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Access Control Policy</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Data Classification Policy</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Incident Response Plan</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Business Continuity Plan</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Change Management Policy</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FileText className="h-3 w-3" />
+                                  <p>Vendor Management Policy</p>
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      
                       <div className="text-center py-8">
                         <p className="text-gray-600 dark:text-gray-400 italic mb-2">
                           "The guided assessment saved us months of work and helped us achieve SOC 2 compliance in record time."
@@ -162,6 +239,100 @@ const Assessment = () => {
                         </div>
                       </div>
                       
+                      <Accordion type="single" collapsible className="w-full mt-6">
+                        <AccordionItem value="audit-1">
+                          <AccordionTrigger>The Audit Lifecycle</AccordionTrigger>
+                          <AccordionContent>
+                            <div className="space-y-4 p-2">
+                              <div className="flex gap-3">
+                                <div className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full h-8 w-8 flex items-center justify-center flex-shrink-0">
+                                  1
+                                </div>
+                                <div>
+                                  <h5 className="font-medium">Preparation Phase</h5>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    3-6 months before audit: Control implementation, policy development, and evidence collection preparation.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex gap-3">
+                                <div className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full h-8 w-8 flex items-center justify-center flex-shrink-0">
+                                  2
+                                </div>
+                                <div>
+                                  <h5 className="font-medium">Pre-Audit Assessment</h5>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    1-2 months before audit: Gap analysis, mock audits, and final remediation of identified issues.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex gap-3">
+                                <div className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full h-8 w-8 flex items-center justify-center flex-shrink-0">
+                                  3
+                                </div>
+                                <div>
+                                  <h5 className="font-medium">Active Audit</h5>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    During audit: Manage auditor requests, provide evidence, and address any immediate concerns.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex gap-3">
+                                <div className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full h-8 w-8 flex items-center justify-center flex-shrink-0">
+                                  4
+                                </div>
+                                <div>
+                                  <h5 className="font-medium">Post-Audit Activities</h5>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    After audit: Address audit findings, implement corrective actions, and prepare for continuous compliance.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                        
+                        <AccordionItem value="audit-2">
+                          <AccordionTrigger>User Access Review Best Practices</AccordionTrigger>
+                          <AccordionContent>
+                            <div className="p-2">
+                              <p className="text-sm mb-3">
+                                User access reviews are critical for compliance with SOC 2, ISO 27001, and many other frameworks. Our audit readiness program helps you implement these best practices:
+                              </p>
+                              <div className="space-y-2 text-sm">
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Document a formal user access review process with defined roles and responsibilities</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Conduct reviews at least quarterly (more frequently for critical systems)</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Include all systems, applications, and infrastructure in your review scope</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Verify appropriate access based on least privilege and need-to-know principles</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Maintain documentation of all reviews, approvals, and actions taken</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
+                                  <p>Automate the review process where possible to improve efficiency and reliability</p>
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      
                       <div className="text-center py-4">
                         <p className="text-gray-700 dark:text-gray-300 font-medium mb-2">
                           Audit Readiness Program Available Soon
@@ -193,6 +364,44 @@ const Assessment = () => {
                     <p className="text-sm text-green-600 dark:text-green-300">
                       Document your security measures as you implement them. Real-time documentation makes the audit process much smoother.
                     </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="bg-primary/10 p-2 rounded-full mr-3 mt-1">
+                      <Info className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-sm">Policy Management</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        Well-documented policies are the foundation of your compliance program. Keep them up-to-date and easily accessible to your team.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="bg-primary/10 p-2 rounded-full mr-3 mt-1">
+                      <Clock className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-sm">Continuous Compliance</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        Compliance is not a one-time event. Establish a continuous monitoring program to maintain compliance throughout the year.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="bg-primary/10 p-2 rounded-full mr-3 mt-1">
+                      <FileQuestion className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-sm">Evidence Collection</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        Start gathering evidence early. Automated evidence collection reduces the burden on your team during audits.
+                      </p>
+                    </div>
                   </div>
                 </div>
                 
@@ -230,6 +439,12 @@ const Assessment = () => {
                       <span className="text-sm">GDPR</span>
                       <span className="text-sm">3-12 months</span>
                     </div>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <Button variant="outline" size="sm" className="w-full">
+                      View Detailed Comparison
+                    </Button>
                   </div>
                 </div>
               </GlassCard>
