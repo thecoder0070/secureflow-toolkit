@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -31,6 +30,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Assessment', path: '/assessment' },
+    { name: 'Resources', path: '/compliance-resources' },
     { name: 'Pricing', path: '#pricing' },
   ];
 
@@ -51,7 +51,6 @@ const Navbar = () => {
           <span className="font-semibold text-xl">SecureFlow</span>
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-1">
           {navItems.map((item) => (
             <Link
@@ -76,7 +75,6 @@ const Navbar = () => {
           <Button className="font-medium">Get Started</Button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden flex items-center"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -90,7 +88,6 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg py-4 px-6 z-40 slide-in-right">
           <div className="flex flex-col space-y-3">

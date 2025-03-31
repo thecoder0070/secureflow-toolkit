@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import ComplianceResources from '@/components/ComplianceResources';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { GlassCard } from '@/components/ui/GlassCard';
 import AssessmentTabs from './components/AssessmentTabs';
@@ -37,11 +36,6 @@ const Assessment = () => {
           
           <GlassCard className="p-6 mb-8">
             <AssessmentRunsList />
-          </GlassCard>
-          
-          <GlassCard className="p-6 mb-8">
-            <h2 className="text-2xl font-bold mb-6">Compliance Resources</h2>
-            <ComplianceResources />
           </GlassCard>
         </FadeIn>
       </div>
