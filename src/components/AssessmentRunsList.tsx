@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { CheckCircle, Calendar, ArrowRight, Settings, Play, Layers } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -151,6 +152,8 @@ const AssessmentRunsList = () => {
 };
 
 const AssessmentRunCard = ({ run }: { run: AssessmentRun }) => {
+  const navigate = useNavigate();
+  
   const formatDate = (date: Date) => {
     return format(date, 'MM/dd/yyyy h:mm a');
   };
@@ -170,6 +173,10 @@ const AssessmentRunCard = ({ run }: { run: AssessmentRun }) => {
       default:
         return 'bg-gray-500';
     }
+  };
+  
+  const handleViewDetails = () => {
+    navigate(`/assessment/detail/${run.id}`);
   };
   
   return (
@@ -251,7 +258,12 @@ const AssessmentRunCard = ({ run }: { run: AssessmentRun }) => {
               <span className="sr-only">Details</span>
             </Button>
           </div>
-          <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-white transition-colors gap-1">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="group-hover:bg-primary group-hover:text-white transition-colors gap-1"
+            onClick={handleViewDetails}
+          >
             View Details
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
