@@ -7,6 +7,7 @@ import AssessmentTabs from './components/AssessmentTabs';
 import ComplianceInsights from './components/ComplianceInsights';
 import AssessmentHeader from './components/AssessmentHeader';
 import AssessmentRunsList from '@/components/AssessmentRunsList';
+import AssessmentAppBar from './components/AssessmentAppBar';
 
 const Assessment = () => {
   useEffect(() => {
@@ -16,8 +17,9 @@ const Assessment = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
-      <div className="pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+      <div className="pt-20 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
         <FadeIn>
+          <AssessmentAppBar />
           <AssessmentHeader />
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">

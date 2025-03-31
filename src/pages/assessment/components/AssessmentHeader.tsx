@@ -14,7 +14,10 @@ const AssessmentHeader = () => {
   return (
     <div className="mb-8">
       <div className="flex flex-col mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-primary">Compliance Check for SaaS Compliance</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-primary flex items-center gap-2">
+          <ShieldCheck className="h-7 w-7" />
+          Compliance Check for SaaS Applications
+        </h1>
         
         <Breadcrumb className="mt-2 mb-4">
           <BreadcrumbItem>
@@ -35,6 +38,7 @@ const AssessmentHeader = () => {
             className="rounded-full"
           >
             <HelpCircle className="h-5 w-5 text-gray-500" />
+            <span className="ml-1">Help</span>
           </Button>
         </div>
         
@@ -46,7 +50,7 @@ const AssessmentHeader = () => {
           
           <Button variant="outline" size="sm" className="gap-2 bg-white dark:bg-gray-800">
             <Play className="h-4 w-4 text-blue-500" />
-            <span className="text-blue-500">Run</span>
+            <span className="text-blue-500">Run Assessment</span>
           </Button>
           
           <Button variant="outline" size="sm" className="gap-2 bg-white dark:bg-gray-800">
