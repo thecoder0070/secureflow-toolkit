@@ -33,7 +33,7 @@ const NoCodeUIStudio = () => {
         <div className="mb-6">
           <Breadcrumb>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
+              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -53,9 +53,11 @@ const NoCodeUIStudio = () => {
               className="pl-10 w-full md:w-[300px]"
             />
           </div>
-          <Button as={Link} to="/no-code-ui/flow/new">
-            <Plus className="mr-2" size={16} /> Create Rule
-          </Button>
+          <Link to="/no-code-ui/flow/new">
+            <Button>
+              <Plus className="mr-2" size={16} /> Create Rule
+            </Button>
+          </Link>
         </div>
 
         <div className="mb-4">
@@ -74,9 +76,11 @@ const NoCodeUIStudio = () => {
                 <p className="text-gray-600 dark:text-gray-300">{rule.description}</p>
               </CardContent>
               <CardFooter className="pt-0 flex justify-end">
-                <Button variant="outline" size="sm" as={Link} to={`/no-code-ui/flow/${rule.id}`}>
-                  View Details
-                </Button>
+                <Link to={`/no-code-ui/flow/${rule.id}`}>
+                  <Button variant="outline" size="sm">
+                    View Details
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}

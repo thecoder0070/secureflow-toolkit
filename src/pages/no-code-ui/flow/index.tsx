@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -331,11 +330,11 @@ const NoCodeUIFlow = () => {
         <div className="mb-6">
           <Breadcrumb>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
+              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/no-code-ui">No-Code UI Studio</BreadcrumbLink>
+              <Link to="/no-code-ui" className="hover:text-primary transition-colors">No-Code UI Studio</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
