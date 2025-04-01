@@ -8,6 +8,39 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbS
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Cloud, Code2, Download, Plus, Save, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
+import ReactFlow, { 
+  Background, 
+  Controls, 
+  MiniMap,
+  addEdge, 
+  useNodesState, 
+  useEdgesState 
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+
+const initialNodes = [
+  {
+    id: '1',
+    type: 'input',
+    data: { label: 'Get a list of Jira tickets' },
+    position: { x: 250, y: 0 },
+  },
+  {
+    id: '2',
+    data: { label: 'Extract the response of jira tickets using JQ expression' },
+    position: { x: 250, y: 100 },
+  },
+  {
+    id: '3',
+    data: { label: 'ConvertFileFormat' },
+    position: { x: 250, y: 200 },
+  },
+];
+
+const initialEdges = [
+  { id: 'e1-2', source: '1', target: '2' },
+  { id: 'e2-3', source: '2', target: '3' },
+];
 
 const NoCodeUIFlow = () => {
   const { id } = useParams();
@@ -20,6 +53,9 @@ const NoCodeUIFlow = () => {
   const [newTag, setNewTag] = useState('');
   const [selectedTask, setSelectedTask] = useState<null | string>(null);
   const [taskDetailsOpen, setTaskDetailsOpen] = useState(false);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [activeTab, setActiveTab] = useState('workflow');
 
   const isNew = id === 'new';
   const totalSteps = 5;
@@ -35,6 +71,8 @@ const NoCodeUIFlow = () => {
       setRulePurpose('GetJiraTickets');
     }
   }, [isNew]);
+
+  const onConnect = (params: any) => setEdges((eds) => addEdge(params, eds));
 
   const handleNextStep = () => {
     if (currentStep < totalSteps) {
@@ -202,122 +240,89 @@ const NoCodeUIFlow = () => {
     </div>
   );
 
-  const renderBuildTaskFlow = () => (
-    <div className="bg-white rounded-lg p-6 shadow-sm border">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Build Task Flow</h2>
-        <div className="flex space-x-2">
-          <Button variant="outline" size="sm">
-            <Code2 className="mr-1 h-4 w-4" />
-            View YAML
-          </Button>
-          <Button variant="outline" size="sm">
-            <Download className="mr-1 h-4 w-4" />
-            Download YAML
-          </Button>
+  const renderWorkflowTab = () => (
+    <div className="h-[600px] border rounded-md p-4 my-4">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        fitView
+      >
+        <Background />
+        <Controls />
+        <MiniMap />
+      </ReactFlow>
+    </div>
+  );
+
+  const renderCodeTab = () => (
+    <div className="border rounded-md p-4 my-4">
+      <pre className="bg-gray-100 p-4 overflow-auto h-[500px] text-sm">
+        {`yaml:
+name: ${ruleName || 'NewRule'}
+description: ${ruleDescription || 'Description goes here'}
+inputs:
+  - name: RequestConfigFile
+    type: HTTP_CONFIG
+outputs:
+  - name: CompliancePCT_
+    type: NUMBER
+  - name: ComplianceStatus_
+    type: STRING
+  - name: LogFile
+    type: FILE
+tasks:
+  - name: ExecuteHtpRequest
+    alias: Get a list of Jira tickets
+    inputs:
+      - RequestConfigFile
+  - name: ApplyJQExpression
+    alias: Extract the response of jira tickets using JQ expression
+  - name: ConvertFileFormat
+`}
+      </pre>
+    </div>
+  );
+
+  const renderComponentsTab = () => (
+    <div className="border rounded-md p-4 my-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div 
+          className="border p-3 rounded-md cursor-pointer hover:bg-gray-50"
+          onClick={() => handleTaskClick('http')}
+        >
+          <h3 className="font-medium">HTTP Request</h3>
+          <p className="text-sm text-gray-500">Make API calls and process responses</p>
         </div>
-      </div>
-      
-      <div className="mb-8">
-        <h3 className="text-lg font-medium mb-4">Rule Inputs</h3>
-        <div className="border rounded-md p-4 relative">
-          <div className="flex justify-between items-center">
-            <div className="bg-gray-100 px-3 py-1.5 rounded-md flex items-center">
-              <span>RequestConfigFile</span>
-              <button className="ml-2 text-gray-500">
-                <X size={14} />
-              </button>
-            </div>
-            <Button size="sm" variant="outline">
-              <Plus size={14} className="mr-1" />
-              Input
-            </Button>
-          </div>
+        <div 
+          className="border p-3 rounded-md cursor-pointer hover:bg-gray-50"
+          onClick={() => handleTaskClick('jq')}
+        >
+          <h3 className="font-medium">JQ Expression</h3>
+          <p className="text-sm text-gray-500">Process JSON with JQ queries</p>
         </div>
-      </div>
-      
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">Tasks</h3>
-          <Button size="sm" variant="outline">
-            <Plus size={14} className="mr-1" />
-            Task Block
-          </Button>
+        <div 
+          className="border p-3 rounded-md cursor-pointer hover:bg-gray-50"
+          onClick={() => handleTaskClick('convert')}
+        >
+          <h3 className="font-medium">File Converter</h3>
+          <p className="text-sm text-gray-500">Convert between file formats</p>
         </div>
-        
-        <div className="border rounded-md p-8 mb-4 relative">
-          <div className="flex flex-col space-y-8">
-            <div className="flex justify-center">
-              <div 
-                className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer flex items-center"
-                onClick={() => handleTaskClick('jira')}
-              >
-                <span>Get a list of Jira tickets</span>
-                <button className="ml-3 text-gray-500">
-                  <X size={14} />
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex justify-center relative">
-              <div className="absolute top-[-20px] left-1/2 transform -translate-x-1/2 h-[20px] w-px border-l border-gray-300" />
-              <div className="transform -translate-x-1/2 left-1/2 absolute">
-                <svg className="w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
-            
-            <div className="flex justify-center">
-              <div 
-                className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer flex items-center"
-                onClick={() => handleTaskClick('jq')}
-              >
-                <span>Extract the response of jira tickets using JQ expression</span>
-                <button className="ml-3 text-gray-500">
-                  <X size={14} />
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex justify-center relative">
-              <div className="absolute top-[-20px] left-1/2 transform -translate-x-1/2 h-[20px] w-px border-l border-gray-300" />
-              <div className="transform -translate-x-1/2 left-1/2 absolute">
-                <svg className="w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
-            
-            <div className="flex justify-center">
-              <div 
-                className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer flex items-center"
-                onClick={() => handleTaskClick('convert')}
-              >
-                <span>ConvertFileFormat</span>
-                <button className="ml-3 text-gray-500">
-                  <X size={14} />
-                </button>
-              </div>
-            </div>
-          </div>
+        <div 
+          className="border p-3 rounded-md cursor-pointer hover:bg-gray-50"
+          onClick={() => handleTaskClick('sql')}
+        >
+          <h3 className="font-medium">SQL Query</h3>
+          <p className="text-sm text-gray-500">Execute SQL queries against databases</p>
         </div>
-      </div>
-      
-      <div>
-        <h3 className="text-lg font-medium mb-4">Rule Outputs</h3>
-        <div className="border rounded-md p-4">
-          <div className="flex flex-wrap gap-2 items-center justify-between">
-            <div className="flex flex-wrap gap-2">
-              <div className="bg-gray-100 px-3 py-1.5 rounded-md">CompliancePCT_</div>
-              <div className="bg-gray-100 px-3 py-1.5 rounded-md">ComplianceStatus_</div>
-              <div className="bg-gray-100 px-3 py-1.5 rounded-md">LogFile</div>
-            </div>
-            <Button size="sm" variant="outline">
-              <Plus size={14} className="mr-1" />
-              Output
-            </Button>
-          </div>
+        <div 
+          className="border p-3 rounded-md cursor-pointer hover:bg-gray-50"
+          onClick={() => handleTaskClick('transform')}
+        >
+          <h3 className="font-medium">Data Transform</h3>
+          <p className="text-sm text-gray-500">Transform data between formats</p>
         </div>
       </div>
     </div>
@@ -350,8 +355,85 @@ const NoCodeUIFlow = () => {
 
         <div className="mb-8">
           {currentStep === 1 && renderConfigureRule()}
-          {currentStep === 2 && renderBuildTaskFlow()}
-          {/* Additional steps would be implemented here */}
+          {currentStep === 2 && (
+            <div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-semibold">Build Task Flow</h2>
+                  <div className="flex space-x-2">
+                    <Button variant="outline" size="sm">
+                      <Code2 className="mr-1 h-4 w-4" />
+                      View YAML
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Download className="mr-1 h-4 w-4" />
+                      Download YAML
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="flex border-b mb-4">
+                  <button
+                    className={cn("px-4 py-2 font-medium", activeTab === 'workflow' ? "border-b-2 border-primary text-primary" : "text-gray-500")}
+                    onClick={() => setActiveTab('workflow')}
+                  >
+                    Workflow
+                  </button>
+                  <button
+                    className={cn("px-4 py-2 font-medium", activeTab === 'code' ? "border-b-2 border-primary text-primary" : "text-gray-500")}
+                    onClick={() => setActiveTab('code')}
+                  >
+                    YAML
+                  </button>
+                  <button
+                    className={cn("px-4 py-2 font-medium", activeTab === 'components' ? "border-b-2 border-primary text-primary" : "text-gray-500")}
+                    onClick={() => setActiveTab('components')}
+                  >
+                    Components
+                  </button>
+                </div>
+                
+                {activeTab === 'workflow' && renderWorkflowTab()}
+                {activeTab === 'code' && renderCodeTab()}
+                {activeTab === 'components' && renderComponentsTab()}
+                
+                <div className="mt-8">
+                  <h3 className="text-lg font-medium mb-4">Rule Inputs</h3>
+                  <div className="border rounded-md p-4 relative">
+                    <div className="flex justify-between items-center">
+                      <div className="bg-gray-100 px-3 py-1.5 rounded-md flex items-center">
+                        <span>RequestConfigFile</span>
+                        <button className="ml-2 text-gray-500">
+                          <X size={14} />
+                        </button>
+                      </div>
+                      <Button size="sm" variant="outline">
+                        <Plus size={14} className="mr-1" />
+                        Input
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8">
+                  <h3 className="text-lg font-medium mb-4">Rule Outputs</h3>
+                  <div className="border rounded-md p-4">
+                    <div className="flex flex-wrap gap-2 items-center justify-between">
+                      <div className="flex flex-wrap gap-2">
+                        <div className="bg-gray-100 px-3 py-1.5 rounded-md">CompliancePCT_</div>
+                        <div className="bg-gray-100 px-3 py-1.5 rounded-md">ComplianceStatus_</div>
+                        <div className="bg-gray-100 px-3 py-1.5 rounded-md">LogFile</div>
+                      </div>
+                      <Button size="sm" variant="outline">
+                        <Plus size={14} className="mr-1" />
+                        Output
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex justify-between">
