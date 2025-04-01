@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Assessment from "./pages/assessment";
 import AssessmentDetail from "./pages/assessment/detail";
 import ComplianceResourcesPage from "./pages/compliance-resources";
+import NoCodeUIStudio from "./pages/no-code-ui";
+import NoCodeUIFlow from "./pages/no-code-ui/flow";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/assessment/detail/:id" element={<AssessmentDetail />} />
           <Route path="/compliance-resources" element={<ComplianceResourcesPage />} />
+          <Route path="/no-code-ui" element={<NoCodeUIStudio />} />
+          <Route path="/no-code-ui/flow/:id" element={<NoCodeUIFlow />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -9,7 +10,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +32,7 @@ const Navbar = () => {
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Assessment', path: '/assessment' },
     { name: 'Resources', path: '/compliance-resources' },
+    { name: 'No-Code UI', path: '/no-code-ui' },
     { name: 'Pricing', path: '#pricing' },
   ];
 
