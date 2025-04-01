@@ -13,14 +13,11 @@ import {
   LayoutDashboard, 
   FileText, 
   ClipboardList, 
-  Package, 
-  List,
   Database,
-  Link2, 
-  FileBox,
   Bell,
   Mail,
-  Settings
+  Settings,
+  ChevronDown
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -40,10 +37,11 @@ const AssessmentAppBar = () => {
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4">
         <NavigationMenu>
           <NavigationMenuList className="flex-wrap gap-1">
+            {/* Simplified Dashboard & Reports Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboards</span>
+                <span>Dashboards & Reports</span>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 w-[220px]">
@@ -51,21 +49,10 @@ const AssessmentAppBar = () => {
                     <NavigationMenuLink asChild>
                       <Link to="/dashboard" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                         <LayoutDashboard className="h-4 w-4" />
-                        <span>Overview</span>
+                        <span>Overview Dashboard</span>
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                <FileText className="mr-2 h-4 w-4" />
-                <span>Reports</span>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 w-[220px]">
                   <li>
                     <NavigationMenuLink asChild>
                       <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
@@ -78,6 +65,7 @@ const AssessmentAppBar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             
+            {/* Assessments Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(
                 "bg-transparent",
@@ -100,75 +88,35 @@ const AssessmentAppBar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                <Package className="mr-2 h-4 w-4" />
-                <span>Codes Catalog</span>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 w-[220px]">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <Package className="h-4 w-4" />
-                        <span>Browse Codes</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                <List className="mr-2 h-4 w-4" />
-                <span>My Queue</span>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 w-[220px]">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <List className="h-4 w-4" />
-                        <span>View Tasks</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            
+            {/* Resources Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent">
                 <Database className="mr-2 h-4 w-4" />
-                <span>Applications Catalog</span>
+                <span>Resources</span>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 w-[220px]">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link to="/compliance-resources" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                        <FileText className="h-4 w-4" />
+                        <span>Compliance Resources</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
                   <li>
                     <NavigationMenuLink asChild>
                       <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                         <Database className="h-4 w-4" />
-                        <span>Browse Applications</span>
+                        <span>Data Catalog</span>
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                <Database className="mr-2 h-4 w-4" />
-                <span>Data Catalog</span>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 w-[220px]">
                   <li>
                     <NavigationMenuLink asChild>
                       <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                         <Database className="h-4 w-4" />
-                        <span>Browse Data</span>
+                        <span>Applications Catalog</span>
                       </Link>
                     </NavigationMenuLink>
                   </li>
@@ -176,33 +124,15 @@ const AssessmentAppBar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             
+            {/* No-Code UI direct link */}
             <NavigationMenuItem>
-              <Link to="/compliance-resources" className={cn(
+              <Link to="/no-code-ui" className={cn(
                 "flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none",
-                location.pathname.includes("/compliance-resources") && "text-primary font-medium"
+                location.pathname.includes("/no-code-ui") && "text-primary font-medium"
               )}>
-                <Link2 className="mr-2 h-4 w-4" />
-                <span>Control Evidence</span>
+                <FileText className="mr-2 h-4 w-4" />
+                <span>No-Code UI</span>
               </Link>
-            </NavigationMenuItem>
-            
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                <FileBox className="mr-2 h-4 w-4" />
-                <span>Forms</span>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 w-[220px]">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <FileBox className="h-4 w-4" />
-                        <span>View Forms</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
