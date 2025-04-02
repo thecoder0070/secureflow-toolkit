@@ -17,7 +17,9 @@ import {
   Bell,
   Mail,
   Settings,
-  ChevronDown
+  ChevronDown,
+  BarChart,
+  ListChecks,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -37,11 +39,11 @@ const AssessmentAppBar = () => {
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4">
         <NavigationMenu>
           <NavigationMenuList className="flex-wrap gap-1">
-            {/* Simplified Dashboard & Reports Menu */}
+            {/* Dashboard */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboards & Reports</span>
+                <span>Dashboard</span>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 w-[220px]">
@@ -56,8 +58,8 @@ const AssessmentAppBar = () => {
                   <li>
                     <NavigationMenuLink asChild>
                       <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <FileText className="h-4 w-4" />
-                        <span>Compliance Reports</span>
+                        <BarChart className="h-4 w-4" />
+                        <span>Analytics</span>
                       </Link>
                     </NavigationMenuLink>
                   </li>
@@ -65,7 +67,35 @@ const AssessmentAppBar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             
-            {/* Assessments Menu */}
+            {/* Reports */}
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent">
+                <FileText className="mr-2 h-4 w-4" />
+                <span>Reports</span>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-4 w-[220px]">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                        <FileText className="h-4 w-4" />
+                        <span>Compliance Reports</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                        <BarChart className="h-4 w-4" />
+                        <span>Performance Reports</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            
+            {/* Assessments */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className={cn(
                 "bg-transparent",
@@ -84,55 +114,44 @@ const AssessmentAppBar = () => {
                       </Link>
                     </NavigationMenuLink>
                   </li>
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                        <ListChecks className="h-4 w-4" />
+                        <span>Templates</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
             
-            {/* Resources Menu */}
+            {/* My Queue */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent">
-                <Database className="mr-2 h-4 w-4" />
-                <span>Resources</span>
+                <ListChecks className="mr-2 h-4 w-4" />
+                <span>My Queue</span>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 w-[220px]">
                   <li>
                     <NavigationMenuLink asChild>
-                      <Link to="/compliance-resources" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                        <ListChecks className="h-4 w-4" />
+                        <span>Tasks</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                         <FileText className="h-4 w-4" />
-                        <span>Compliance Resources</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <Database className="h-4 w-4" />
-                        <span>Data Catalog</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link to="#" className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                        <Database className="h-4 w-4" />
-                        <span>Applications Catalog</span>
+                        <span>Pending Reviews</span>
                       </Link>
                     </NavigationMenuLink>
                   </li>
                 </ul>
               </NavigationMenuContent>
-            </NavigationMenuItem>
-            
-            {/* No-Code UI direct link */}
-            <NavigationMenuItem>
-              <Link to="/no-code-ui" className={cn(
-                "flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none",
-                location.pathname.includes("/no-code-ui") && "text-primary font-medium"
-              )}>
-                <FileText className="mr-2 h-4 w-4" />
-                <span>No-Code UI</span>
-              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

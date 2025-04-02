@@ -27,13 +27,13 @@ const Navbar = () => {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  // Simplified navigation items
+  // Updated navigation items to match assessment menu headers
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Assessment', path: '/assessment' },
-    { name: 'Resources', path: '/compliance-resources' },
-    { name: 'No-Code UI', path: '/no-code-ui' },
+    { name: 'Reports', path: '/compliance-resources' },
+    { name: 'Assessments', path: '/assessment' },
+    { name: 'My Queue', path: '/no-code-ui' },
   ];
 
   return (
