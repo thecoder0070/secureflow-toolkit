@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -30,15 +30,20 @@ const FormsPage = () => {
       <div className="pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
         <Breadcrumb className="mb-6">
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/">
-              <Home className="h-4 w-4 mr-1" />
-              Home
+            <BreadcrumbLink href="/" asChild>
+              <Link to="/">
+                <Home className="h-4 w-4 mr-1" />
+                Home
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
+          <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/forms">
-              <FileText className="h-4 w-4 mr-1" />
-              Manage Forms
+            <BreadcrumbLink href="/forms" asChild>
+              <Link to="/forms">
+                <FileText className="h-4 w-4 mr-1" />
+                Manage Forms
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>

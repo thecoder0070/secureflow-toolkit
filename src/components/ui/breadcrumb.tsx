@@ -3,6 +3,7 @@ import * as React from "react";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
+import { Link } from "react-router-dom";
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,
@@ -62,8 +63,10 @@ const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithoutRef<"a"> & {
     asChild?: boolean;
+  } & { 
+    href?: string;
   }
->(({ className, asChild = false, ...props }, ref) => {
+>(({ className, asChild = false, href, ...props }, ref) => {
   const Comp = asChild ? Slot : "a";
   return (
     <Comp
@@ -72,11 +75,26 @@ const BreadcrumbLink = React.forwardRef<
         "inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-foreground",
         className
       )}
+      href={href}
       {...props}
     />
   );
 });
 BreadcrumbLink.displayName = "BreadcrumbLink";
+
+// Add the missing BreadcrumbPage component
+const BreadcrumbPage = React.forwardRef<
+  HTMLSpanElement,
+  React.ComponentPropsWithoutRef<"span">
+>(({ className, ...props }, ref) => (
+  <span
+    ref={ref}
+    aria-current="page"
+    className={cn("text-sm font-medium text-foreground", className)}
+    {...props}
+  />
+));
+BreadcrumbPage.displayName = "BreadcrumbPage";
 
 const BreadcrumbEllipsis = React.forwardRef<
   HTMLSpanElement,
@@ -100,5 +118,6 @@ export {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
+  BreadcrumbPage,
   BreadcrumbEllipsis,
 };

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, Settings, Play, Layers, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -52,7 +53,9 @@ const AssessmentHeader = () => {
         
         <Breadcrumb className="mt-2 mb-4">
           <BreadcrumbItem>
-            <BreadcrumbLink to="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href="/" asChild>
+              <Link to="/">Home</Link>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

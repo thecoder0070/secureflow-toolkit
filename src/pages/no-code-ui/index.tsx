@@ -33,7 +33,9 @@ const NoCodeUIStudio = () => {
         <div className="mb-6">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <BreadcrumbLink href="/" asChild>
+                <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

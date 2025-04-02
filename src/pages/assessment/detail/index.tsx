@@ -108,19 +108,27 @@ const AssessmentDetail = () => {
             <div className="flex flex-col mb-6">
               <Breadcrumb className="mb-4">
                 <BreadcrumbItem>
-                  <BreadcrumbLink to="/">Home</BreadcrumbLink>
+                  <BreadcrumbLink href="/" asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink to="/assessment">Assessment Runs</BreadcrumbLink>
+                  <BreadcrumbLink href="/assessment" asChild>
+                    <Link to="/assessment">Assessment Runs</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink to="/compliance-resources">Compliance Checks</BreadcrumbLink>
+                  <BreadcrumbLink href="/compliance-resources" asChild>
+                    <Link to="/compliance-resources">Compliance Checks</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink to="#">SaaS Compliance-10/31/2024</BreadcrumbLink>
+                  <BreadcrumbLink href="#" asChild>
+                    <Link to="#">SaaS Compliance-10/31/2024</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
