@@ -27,13 +27,13 @@ const Navbar = () => {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  // Updated navigation items
+  // Updated navigation items - changed "My Queue" to "No Code UI"
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Reports', path: '/compliance-resources' },
     { name: 'Assessments', path: '/assessment' },
-    { name: 'My Queue', path: '/no-code-ui' },
+    { name: 'No Code UI', path: '/no-code-ui' },
     { name: 'Forms', path: '/forms' },
     { name: 'Rules Catalog', path: '/rules-catalog' },
   ];
