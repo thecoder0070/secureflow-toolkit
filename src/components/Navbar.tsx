@@ -35,6 +35,7 @@ const Navbar = () => {
     { name: 'Assessments', path: '/assessment' },
     { name: 'My Queue', path: '/no-code-ui' },
     { name: 'Forms', path: '/forms' },
+    { name: 'Rules Catalog', path: '/rules-catalog' },
   ];
 
   return (
