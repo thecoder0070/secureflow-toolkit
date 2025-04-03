@@ -22,24 +22,63 @@ import {
   Settings,
   FileCode,
   Download,
-  Code
+  Code,
+  Cloud
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+
+// Task type for our demo
+type Task = {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+  category: string;
+};
 
 const NoCodeUIFlow = () => {
   const { id } = useParams();
   const isNewFlow = id === 'new';
   const [activeTab, setActiveTab] = useState<string>("workflow");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(true);
   
+  // Steps in the workflow process
   const steps = [
     { id: 1, name: 'Configure Rule', icon: Settings, status: 'current' },
     { id: 2, name: 'Build Task Flow', icon: FileCode, status: 'upcoming' },
-    { id: 3, name: 'Provide Application Credentials', icon: CheckCircle2, status: 'upcoming' },
+    { id: 3, name: 'Provide Application Credentials', icon: Cloud, status: 'upcoming' },
     { id: 4, name: 'Execute', icon: Play, status: 'upcoming' },
     { id: 5, name: 'Publish', icon: CircleDashed, status: 'upcoming' },
   ];
   
+  // Sample tasks for the dialog
+  const tasks: Task[] = [
+    { id: '1', name: 'AWSAccessKeyRotationReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '2', name: 'AWSAccountAuthorizationDetails', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '3', name: 'AWSAccountPasswordPolicy', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '4', name: 'AWSAuditManagerFetchAssessment', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '5', name: 'AWSAuditManagerFetchEvidence', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '6', name: 'AWSAuditManagerStandardizedReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '7', name: 'AWSCheckForLatestAMI', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '8', name: 'AWSCredentialsReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '9', name: 'AWSGenerateHardwareReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '10', name: 'AWSMFAPolicySimulatorReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+    { id: '11', name: 'AWSMFAReport', icon: <Cloud className="h-4 w-4" />, category: 'Favourites' },
+  ];
+  
+  const filteredTasks = showFavorites 
+    ? tasks.filter(task => task.category === 'Favourites')
+    : tasks;
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
@@ -76,7 +115,7 @@ const NoCodeUIFlow = () => {
                 <Save className="mr-2 h-4 w-4" />
                 Save
               </Button>
-              <Button variant="default" size="sm" className="bg-yellow-500 hover:bg-yellow-600">
+              <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90 text-white">
                 Publish changes
               </Button>
             </div>
@@ -108,189 +147,214 @@ const NoCodeUIFlow = () => {
           </div>
         </div>
         
-        <Tabs defaultValue="workflow" className="w-full">
-          <TabsList className="mb-6">
-            <TabsTrigger value="workflow" onClick={() => setActiveTab("workflow")}>Workflow</TabsTrigger>
-            <TabsTrigger value="settings" onClick={() => setActiveTab("settings")}>Settings</TabsTrigger>
-          </TabsList>
+        <Card className="p-6 mb-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">Build Task Flow</h2>
+            <div className="flex space-x-2">
+              <Button variant="outline" size="sm">
+                <Code className="mr-2 h-4 w-4" />
+                View YAML
+              </Button>
+              <Button variant="outline" size="sm">
+                <Download className="mr-2 h-4 w-4" />
+                Download YAML
+              </Button>
+            </div>
+          </div>
           
-          <TabsContent value="workflow" className="space-y-4">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              <div className="lg:col-span-1 space-y-4">
-                <Card className="p-4">
-                  <h3 className="font-medium mb-3">Build</h3>
-                  <p className="text-sm text-gray-500 mb-4">Drag blocks into the workflow</p>
-                  
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium flex justify-between items-center">
-                      Rules
-                      <span className="bg-gray-100 text-xs px-2 py-1 rounded">New</span>
-                    </h4>
-                    
-                    {/* Rule Components */}
-                    <div className="space-y-2 mt-2">
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                          <span>True/false branch</span>
-                        </div>
-                      </div>
-                      
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
-                          <span>Multi-split branch</span>
-                        </div>
-                      </div>
-                      
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                          <span>Delay</span>
-                        </div>
-                      </div>
-                      
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-amber-500 rounded-full mr-2"></div>
-                          <span>Exit</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <h4 className="text-sm font-medium mt-4">Actions</h4>
-                    
-                    {/* Action Components */}
-                    <div className="space-y-2 mt-2">
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span>Get Data</span>
-                        </div>
-                      </div>
-                      
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-rose-500 rounded-full mr-2"></div>
-                          <span>Transform Data</span>
-                        </div>
-                      </div>
-                      
-                      <div className="p-2 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-teal-500 rounded-full mr-2"></div>
-                          <span>Send Notification</span>
-                        </div>
-                      </div>
-                    </div>
+          <Tabs defaultValue="workflow" className="w-full">
+            <TabsList className="mb-6">
+              <TabsTrigger value="workflow" onClick={() => setActiveTab("workflow")}>Workflow</TabsTrigger>
+              <TabsTrigger value="yaml" onClick={() => setActiveTab("yaml")}>YAML</TabsTrigger>
+              <TabsTrigger value="components" onClick={() => setActiveTab("components")}>Components</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="workflow" className="space-y-4">
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">Rule Inputs</h3>
+                <div className="flex gap-2 items-center">
+                  <div className="inline-block px-3 py-1 bg-gray-100 rounded-md text-sm flex items-center">
+                    RequestConfigFile
+                    <button className="ml-2 text-gray-500 hover:text-gray-700">×</button>
                   </div>
-                </Card>
-                
-                <Card className="p-4">
-                  <h3 className="font-medium mb-3">Rule Properties</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <label className="text-sm text-gray-500 block mb-1">Name</label>
-                      <Input 
-                        type="text" 
-                        placeholder="Rule name"
-                        defaultValue={isNewFlow ? '' : `Rule ${id}`}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-500 block mb-1">Description</label>
-                      <textarea 
-                        className="w-full p-2 border rounded-md" 
-                        rows={3}
-                        placeholder="Describe what this rule does"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm text-gray-500 block mb-1">Trigger</label>
-                      <select className="w-full p-2 border rounded-md">
-                        <option>Manual</option>
-                        <option>Scheduled</option>
-                        <option>Event-based</option>
-                      </select>
-                    </div>
-                  </div>
-                </Card>
+                  <Button variant="outline" size="sm">
+                    <Plus className="h-4 w-4 mr-1" /> Input
+                  </Button>
+                </div>
               </div>
               
-              <div className="lg:col-span-3">
-                <div className="flex justify-between items-center mb-4">
-                  <div>
-                    <h3 className="text-lg font-medium">When this happens</h3>
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
-                      <Code className="mr-2 h-4 w-4" />
-                      View YAML
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Download className="mr-2 h-4 w-4" />
-                      Download YAML
-                    </Button>
-                  </div>
+              <div className="mb-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-medium">Tasks</h3>
+                  <Button variant="outline" size="sm" onClick={() => setDialogOpen(true)}>
+                    <Plus className="h-4 w-4 mr-1" /> Task Block
+                  </Button>
                 </div>
-
-                <Card className="p-4 h-[600px] flex items-center justify-center">
+                
+                <div className="mt-4 border rounded-lg p-10 h-[400px] flex items-center justify-center">
                   <div className="text-center">
                     <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                       <Plus className="h-8 w-8 text-gray-400" />
                     </div>
                     <h3 className="text-lg font-medium mb-2">Design Your Flow</h3>
                     <p className="text-gray-500 max-w-md mx-auto mb-4">
-                      Drag components from the left panel to build your automation workflow. Connect them to create a rule.
+                      Add tasks to build your automation workflow. Connect them to create a rule.
                     </p>
-                    <Button variant="outline">
+                    <Button variant="outline" onClick={() => setDialogOpen(true)}>
                       <Plus className="mr-2 h-4 w-4" />
-                      Add First Component
+                      Add a Task
                     </Button>
                   </div>
-                </Card>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex justify-between mt-8">
-              <Button variant="outline">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back
-              </Button>
-              <Button>
-                Next <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
-              </Button>
-            </div>
-          </TabsContent>
+              
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">Rule Outputs</h3>
+                <div className="flex gap-2 items-center flex-wrap">
+                  <div className="inline-block px-3 py-1 bg-gray-100 rounded-md text-sm">
+                    CompliancePCT_
+                  </div>
+                  <div className="inline-block px-3 py-1 bg-gray-100 rounded-md text-sm">
+                    ComplianceStatus_
+                  </div>
+                  <div className="inline-block px-3 py-1 bg-gray-100 rounded-md text-sm">
+                    LogFile
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Plus className="h-4 w-4 mr-1" /> Output
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
 
-          <TabsContent value="settings">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Rule Settings</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm text-gray-500 block mb-1">Run this workflow</label>
-                  <select className="w-full p-2 border rounded-md">
-                    <option>Every day</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>When triggered</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-sm text-gray-500 block mb-1">Start</label>
-                  <select className="w-full p-2 border rounded-md">
-                    <option>Immediately after activation</option>
-                    <option>At specific time</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-sm text-gray-500 block mb-1">Time period</label>
-                  <Input type="text" placeholder="Last 30 days" />
-                </div>
+            <TabsContent value="yaml">
+              <div className="bg-gray-100 p-4 rounded-md h-[400px] overflow-auto">
+                <pre className="text-sm">
+                  {`# Rule Definition
+name: Example Rule
+description: This is an example rule configuration
+version: 1.0
+
+inputs:
+  - name: RequestConfigFile
+    type: file
+    required: true
+
+tasks:
+  - name: FetchConfigData
+    type: api
+    endpoint: /api/config
+    method: GET
+    
+  - name: ProcessData
+    type: transformation
+    input: FetchConfigData.response
+    
+  - name: GenerateReport
+    type: report
+    template: compliance-summary
+    data: ProcessData.output
+
+outputs:
+  - name: CompliancePCT_
+    value: GenerateReport.compliancePercentage
+  - name: ComplianceStatus_
+    value: GenerateReport.status
+  - name: LogFile
+    value: GenerateReport.logFile`}
+                </pre>
               </div>
-            </Card>
-          </TabsContent>
-        </Tabs>
+            </TabsContent>
+            
+            <TabsContent value="components">
+              <p className="text-gray-500">Select components to add to your workflow.</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+                {['API Call', 'Transform', 'Decision', 'Loop', 'Data Store', 'Notification', 'Report', 'Export'].map((component) => (
+                  <div key={component} className="border p-4 rounded-md hover:bg-gray-50 cursor-pointer">
+                    <div className="font-medium">{component}</div>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </Card>
+        
+        <div className="flex justify-between mt-8">
+          <Button variant="outline">
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back
+          </Button>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <span>2 / 5</span>
+          </div>
+          <Button>
+            Next <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
+          </Button>
+        </div>
       </div>
+      
+      {/* Task Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Add Tasks</DialogTitle>
+          </DialogHeader>
+          
+          <div className="mb-4">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="favorites" checked={showFavorites} onCheckedChange={() => setShowFavorites(!showFavorites)} />
+                <label htmlFor="favorites" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Favourites
+                </label>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Checkbox id="generic" />
+                <label htmlFor="generic" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Generic
+                </label>
+              </div>
+              
+              <div className="ml-auto">
+                <Input placeholder="Search" className="h-9 w-[200px]" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="max-h-[400px] overflow-y-auto">
+            <div className="space-y-2">
+              {filteredTasks.map((task) => (
+                <div key={task.id} className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-md cursor-pointer">
+                  <div className="flex items-center">
+                    {task.icon}
+                    <span className="ml-2">{task.name}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="p-1 hover:bg-gray-200 rounded">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </button>
+                    <button className="p-1 hover:bg-gray-200 rounded">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-between items-center mt-4">
+            <div className="flex items-center gap-2">
+              <Checkbox id="expanded" />
+              <label htmlFor="expanded" className="text-sm font-medium leading-none">
+                Expanded
+              </label>
+            </div>
+            <DialogClose asChild>
+              <Button>Close</Button>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
