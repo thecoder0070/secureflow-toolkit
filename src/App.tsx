@@ -14,6 +14,7 @@ import NoCodeUIFlow from "./pages/no-code-ui/flow";
 import FormsPage from "./pages/forms";
 import RulesCatalogPage from "./pages/rules-catalog";
 import NewRulePage from "./pages/rules-catalog/new";
+import IntegrationsPage from "./pages/integrations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/forms" element={<FormsPage />} />
           <Route path="/rules-catalog" element={<RulesCatalogPage />} />
           <Route path="/rules-catalog/new" element={<NewRulePage />} />
+          <Route path="/integrations" element={<IntegrationsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
