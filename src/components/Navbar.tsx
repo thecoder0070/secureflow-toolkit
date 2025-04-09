@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageSquare } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -36,6 +36,7 @@ const Navbar = () => {
     { name: 'Forms', path: '/forms' },
     { name: 'Rules Catalog', path: '/rules-catalog' },
     { name: 'Integrations', path: '/integrations' },
+    { name: 'Chat', path: '/chat', icon: <MessageSquare className="h-4 w-4 mr-1" /> },
   ];
 
   return (
@@ -61,13 +62,17 @@ const Navbar = () => {
               key={item.path}
               to={item.path}
               className={cn(
-                'px-4 py-2 rounded-md font-medium transition-colors duration-200',
+                'px-4 py-2 rounded-md font-medium transition-colors duration-200 flex items-center',
                 isActive(item.path)
                   ? 'text-primary'
                   : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               )}
             >
+              {item.icon && item.icon}
               {item.name}
+              {item.path === '/chat' && (
+                <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-primary text-white">New</span>
+              )}
             </Link>
           ))}
         </div>
@@ -100,14 +105,18 @@ const Navbar = () => {
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  'px-4 py-3 rounded-md font-medium transition-colors duration-200',
+                  'px-4 py-3 rounded-md font-medium transition-colors duration-200 flex items-center',
                   isActive(item.path)
                     ? 'bg-primary/10 text-primary'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 )}
                 onClick={closeMobileMenu}
               >
+                {item.icon && item.icon}
                 {item.name}
+                {item.path === '/chat' && (
+                  <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-primary text-white">New</span>
+                )}
               </Link>
             ))}
             <div className="pt-2 flex flex-col space-y-3">

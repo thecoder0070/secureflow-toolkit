@@ -15,6 +15,7 @@ import FormsPage from "./pages/forms";
 import RulesCatalogPage from "./pages/rules-catalog";
 import NewRulePage from "./pages/rules-catalog/new";
 import IntegrationsPage from "./pages/integrations";
+import ChatInterface from "./pages/chat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/rules-catalog" element={<RulesCatalogPage />} />
           <Route path="/rules-catalog/new" element={<NewRulePage />} />
           <Route path="/integrations" element={<IntegrationsPage />} />
+          <Route path="/chat" element={<ChatInterface />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
