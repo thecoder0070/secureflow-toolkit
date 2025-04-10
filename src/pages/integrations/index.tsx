@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ChevronLeft, ChevronRight, Filter, Star } from 'lucide-react';
+import { Home, ChevronLeft, ChevronRight, Filter, Star } from 'lucide-react';
 
 type Application = {
   id: number;
@@ -133,10 +133,21 @@ const IntegrationsPage = () => {
         </TabsList>
         
         <TabsContent value="applications" className="pt-6">
-          <div className="flex items-center gap-1 text-sm text-muted-foreground mb-4">
-            <Link to="/" className="hover:underline">Home</Link>
-            <span>/</span>
-            <span className="text-foreground">Applications Catalog</span>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <Link to="/" className="text-blue-500 hover:underline flex items-center">
+                <Home className="h-3.5 w-3.5 mr-1" />Home
+              </Link>
+              <span className="mx-2">&gt;</span>
+              <span className="text-foreground">Applications Catalog</span>
+            </div>
+            
+            <Button asChild variant="outline" size="sm" className="flex items-center gap-1">
+              <Link to="/">
+                <Home className="h-4 w-4 mr-1" />
+                Back to Home
+              </Link>
+            </Button>
           </div>
           
           <h1 className="text-2xl font-bold mb-8">Applications Catalog</h1>
