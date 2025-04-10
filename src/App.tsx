@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Assessment from "./pages/assessment";
 import AssessmentDetail from "./pages/assessment/detail";
 import ComplianceResourcesPage from "./pages/compliance-resources";
+import ComplianceDashboardPage from "./pages/compliance-dashboard";
 import NoCodeUIStudio from "./pages/no-code-ui";
 import NoCodeUIFlow from "./pages/no-code-ui/flow";
 import FormsPage from "./pages/forms";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/assessment/detail/:id" element={<AssessmentDetail />} />
           <Route path="/compliance-resources" element={<ComplianceResourcesPage />} />
+          <Route path="/compliance-dashboard" element={<ComplianceDashboardPage />} />
           <Route path="/no-code-ui" element={<NoCodeUIStudio />} />
           <Route path="/no-code-ui/flow/:id" element={<NoCodeUIFlow />} />
           <Route path="/forms" element={<FormsPage />} />
