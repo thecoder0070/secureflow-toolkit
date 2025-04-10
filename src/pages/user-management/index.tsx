@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -23,7 +24,7 @@ import {
   DialogTitle, 
   DialogTrigger 
 } from "@/components/ui/dialog";
-import { PlusCircle, Search, Filter, UserPlus, Upload, RefreshCw, Edit, Trash, User, Grid, List } from 'lucide-react';
+import { PlusCircle, Search, Filter, UserPlus, Upload, RefreshCw, Edit, Trash, User, Grid, List, Home, ArrowLeft } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Mock data for users
@@ -169,12 +170,18 @@ const UserManagementPage = () => {
   return (
     <div className="container mx-auto px-4 py-20">
       <div className="flex flex-col space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Manage Users</h1>
-            <p className="text-muted-foreground mt-1">
-              View and manage users and their permissions
-            </p>
+        <div className="flex flex-col space-y-2">
+          <Link to="/" className="flex items-center text-blue-500 hover:text-blue-700 transition-colors w-fit mb-2">
+            <ArrowLeft className="h-4 w-4 mr-1" />
+            <span>Back to Home</span>
+          </Link>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">Manage Users</h1>
+              <p className="text-muted-foreground mt-1">
+                View and manage users and their permissions
+              </p>
+            </div>
           </div>
         </div>
 
