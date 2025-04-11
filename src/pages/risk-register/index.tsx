@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { FadeIn } from '@/components/animations/FadeIn';
 import Navbar from '@/components/Navbar';
@@ -425,36 +424,46 @@ const RiskRegisterPage = () => {
                   <CardTitle className="text-lg font-medium">Risk Scoring Matrix</CardTitle>
                 </CardHeader>
                 <CardContent className="p-4">
-                  <div className="grid grid-cols-5 gap-1 text-center text-xs">
-                    <div className="p-2 bg-gray-200 font-medium">Impact</div>
-                    <div className="p-2 bg-gray-200 font-medium">Very Low</div>
-                    <div className="p-2 bg-gray-200 font-medium">Low</div>
-                    <div className="p-2 bg-gray-200 font-medium">Medium</div>
-                    <div className="p-2 bg-gray-200 font-medium">High</div>
+                  <div className="relative">
+                    <div className="absolute -left-7 top-1/2 -translate-y-1/2 -rotate-90 text-xs font-medium text-gray-500">
+                      Impact
+                    </div>
                     
-                    <div className="p-2 bg-gray-200 font-medium">Very Low</div>
-                    <div className="p-2 bg-green-100">1</div>
-                    <div className="p-2 bg-green-100">2</div>
-                    <div className="p-2 bg-yellow-100">3</div>
-                    <div className="p-2 bg-yellow-100">4</div>
+                    <div className="grid grid-cols-5 gap-1 text-center text-xs ml-6">
+                      <div className="p-2 bg-gray-200 font-medium">Impact</div>
+                      <div className="p-2 bg-gray-200 font-medium">Very Low</div>
+                      <div className="p-2 bg-gray-200 font-medium">Low</div>
+                      <div className="p-2 bg-gray-200 font-medium">Medium</div>
+                      <div className="p-2 bg-gray-200 font-medium">High</div>
+                      
+                      <div className="p-2 bg-gray-200 font-medium">Very Low</div>
+                      <div className="p-2 bg-green-100">1</div>
+                      <div className="p-2 bg-green-100">2</div>
+                      <div className="p-2 bg-yellow-100">3</div>
+                      <div className="p-2 bg-yellow-100">4</div>
+                      
+                      <div className="p-2 bg-gray-200 font-medium">Low</div>
+                      <div className="p-2 bg-green-100">2</div>
+                      <div className="p-2 bg-yellow-100">4</div>
+                      <div className="p-2 bg-yellow-100">6</div>
+                      <div className="p-2 bg-orange-100">8</div>
+                      
+                      <div className="p-2 bg-gray-200 font-medium">Medium</div>
+                      <div className="p-2 bg-yellow-100">3</div>
+                      <div className="p-2 bg-yellow-100">6</div>
+                      <div className="p-2 bg-orange-100">9</div>
+                      <div className="p-2 bg-red-100">12</div>
+                      
+                      <div className="p-2 bg-gray-200 font-medium">High</div>
+                      <div className="p-2 bg-yellow-100">4</div>
+                      <div className="p-2 bg-orange-100">8</div>
+                      <div className="p-2 bg-red-100">12</div>
+                      <div className="p-2 bg-red-200">16</div>
+                    </div>
                     
-                    <div className="p-2 bg-gray-200 font-medium">Low</div>
-                    <div className="p-2 bg-green-100">2</div>
-                    <div className="p-2 bg-yellow-100">4</div>
-                    <div className="p-2 bg-yellow-100">6</div>
-                    <div className="p-2 bg-orange-100">8</div>
-                    
-                    <div className="p-2 bg-gray-200 font-medium">Medium</div>
-                    <div className="p-2 bg-yellow-100">3</div>
-                    <div className="p-2 bg-yellow-100">6</div>
-                    <div className="p-2 bg-orange-100">9</div>
-                    <div className="p-2 bg-red-100">12</div>
-                    
-                    <div className="p-2 bg-gray-200 font-medium">High</div>
-                    <div className="p-2 bg-yellow-100">4</div>
-                    <div className="p-2 bg-orange-100">8</div>
-                    <div className="p-2 bg-red-100">12</div>
-                    <div className="p-2 bg-red-200">16</div>
+                    <div className="text-center mt-2 text-xs font-medium text-gray-500">
+                      Controlability
+                    </div>
                   </div>
                 </CardContent>
               </Card>
