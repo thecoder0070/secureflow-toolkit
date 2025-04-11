@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FadeIn } from '@/components/animations/FadeIn';
 import Navbar from '@/components/Navbar';
@@ -12,7 +13,9 @@ import {
   ChartLegend,
 } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
-import { AlertTriangle, Shield, CheckCircle, Info } from 'lucide-react';
+import { AlertTriangle, Shield, CheckCircle, Info, Calendar } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
 const RiskRegisterPage = () => {
   // State for risk calculation
@@ -21,6 +24,7 @@ const RiskRegisterPage = () => {
   const [integrityImpact, setIntegrityImpact] = useState('Very low');
   const [availabilityImpact, setAvailabilityImpact] = useState('Very low');
   const [controlability, setControlability] = useState('Very low');
+  const [reviewPeriod, setReviewPeriod] = useState('Quarterly');
   
   // Values mapping
   const threatValues = {
@@ -106,11 +110,36 @@ const RiskRegisterPage = () => {
         <FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Card className="shadow-md md:col-span-2">
-              <CardHeader className="pb-2">
+              <CardHeader className="pb-2 flex flex-row items-center justify-between">
                 <CardTitle className="text-lg font-medium flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5 text-amber-500" />
                   Risk Score Analysis
                 </CardTitle>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Review Period:</span>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 gap-1 text-sm">
+                        <Calendar className="h-4 w-4" />
+                        {reviewPeriod}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={() => setReviewPeriod('Monthly')}>
+                        Monthly
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setReviewPeriod('Quarterly')}>
+                        Quarterly
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setReviewPeriod('Bi-annually')}>
+                        Bi-annually
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setReviewPeriod('Annually')}>
+                        Annually
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -412,6 +441,21 @@ const RiskRegisterPage = () => {
                           <SelectItem value="Medium">Medium</SelectItem>
                           <SelectItem value="High">High</SelectItem>
                           <SelectItem value="Very high">Very high</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Review Period</label>
+                      <Select value={reviewPeriod} onValueChange={setReviewPeriod}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select review period" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Monthly">Monthly</SelectItem>
+                          <SelectItem value="Quarterly">Quarterly</SelectItem>
+                          <SelectItem value="Bi-annually">Bi-annually</SelectItem>
+                          <SelectItem value="Annually">Annually</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
