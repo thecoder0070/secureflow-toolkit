@@ -91,6 +91,15 @@ const RiskRegisterPage = () => {
     { name: 'Low', value: 25 },
   ];
 
+  // Top 5 risks data
+  const topRisksData = [
+    { id: 'R-001', name: 'Data breach', score: 85, category: 'Information Security' },
+    { id: 'R-002', name: 'Service outage', score: 72, category: 'Operational' },
+    { id: 'R-003', name: 'Compliance violation', score: 68, category: 'Regulatory' },
+    { id: 'R-004', name: 'Vendor failure', score: 61, category: 'Supply Chain' },
+    { id: 'R-005', name: 'Unauthorized access', score: 58, category: 'Information Security' },
+  ];
+
   // Chart colors
   const severityColors = ['#dc2626', '#ef4444', '#f97316', '#22c55e'];
 
@@ -185,6 +194,36 @@ const RiskRegisterPage = () => {
                         <div className="text-2xl font-bold">{impactScore}</div>
                       </div>
                     </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <h4 className="text-sm font-medium mb-3">Top 5 Risks</h4>
+                  <div className="overflow-x-auto">
+                    <Table className="w-full">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-16">ID</TableHead>
+                          <TableHead>Risk</TableHead>
+                          <TableHead>Category</TableHead>
+                          <TableHead className="text-right w-16">Score</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {topRisksData.map((risk) => (
+                          <TableRow key={risk.id}>
+                            <TableCell className="font-mono text-xs">{risk.id}</TableCell>
+                            <TableCell>{risk.name}</TableCell>
+                            <TableCell>{risk.category}</TableCell>
+                            <TableCell className="text-right">
+                              <span className={`inline-block text-xs px-2 py-1 rounded-full ${getRiskScoreColor(risk.score)}`}>
+                                {risk.score}
+                              </span>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                   </div>
                 </div>
               </CardContent>
