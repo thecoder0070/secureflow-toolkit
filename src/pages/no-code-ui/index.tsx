@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { ArrowLeft, Plus, Search } from 'lucide-react';
+import { ArrowLeft, Plus, Search, Workflow } from 'lucide-react';
 
 const NoCodeUIStudio = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,11 +14,13 @@ const NoCodeUIStudio = () => {
     { id: 1, name: 'GetJiraTickets', description: 'Fetches Jira tickets and processes them' },
     { id: 2, name: 'UpdateComplianceStatus', description: 'Updates compliance status in the system' },
     { id: 3, name: 'GenerateReport', description: 'Creates compliance reports from data sources' },
+    { id: 4, name: 'AWSComplianceCheck', description: 'Checks AWS resources for compliance issues' },
+    { id: 5, name: 'DataSourceConnector', description: 'Connects to external data sources and validates connections' },
   ]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'No-Code UI Studio | SecureFlow';
+    document.title = 'Rule Scribe | SecureFlow';
   }, []);
 
   const filteredRules = rules.filter(rule => 
@@ -39,10 +41,13 @@ const NoCodeUIStudio = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>No-Code UI Studio</BreadcrumbPage>
+              <BreadcrumbPage>Rule Scribe</BreadcrumbPage>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="text-3xl font-bold mt-4">No-Code UI Studio</h1>
+          <h1 className="text-3xl font-bold mt-4">Rule Scribe</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
+            Create and manage rules with our no-code workflow editor
+          </p>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
@@ -56,7 +61,7 @@ const NoCodeUIStudio = () => {
             />
           </div>
           <Link to="/no-code-ui/flow/new">
-            <Button>
+            <Button className="bg-purple-600 hover:bg-purple-700">
               <Plus className="mr-2" size={16} /> Create Rule
             </Button>
           </Link>
@@ -72,7 +77,10 @@ const NoCodeUIStudio = () => {
           {filteredRules.map((rule) => (
             <Card key={rule.id} className="transition-shadow hover:shadow-md">
               <CardHeader className="pb-2">
-                <h3 className="text-xl font-semibold">{rule.name}</h3>
+                <div className="flex items-center">
+                  <Workflow size={18} className="mr-2 text-purple-600" />
+                  <h3 className="text-xl font-semibold">{rule.name}</h3>
+                </div>
               </CardHeader>
               <CardContent className="pb-4">
                 <p className="text-gray-600 dark:text-gray-300">{rule.description}</p>

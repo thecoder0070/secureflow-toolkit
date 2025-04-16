@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
@@ -17,13 +17,13 @@ import {
   Play, 
   Plus, 
   Trash, 
-  CheckCircle2, 
-  CircleDashed,
   Settings,
   FileCode,
   Download,
   Code,
-  Cloud
+  Cloud,
+  RotateCw,
+  Workflow
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
@@ -35,6 +35,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
+import { FlowEditor } from './FlowEditor';
 
 // Task type for our demo
 type Task = {
@@ -57,7 +58,7 @@ const NoCodeUIFlow = () => {
     { id: 2, name: 'Build Task Flow', icon: FileCode, status: 'upcoming' },
     { id: 3, name: 'Provide Application Credentials', icon: Cloud, status: 'upcoming' },
     { id: 4, name: 'Execute', icon: Play, status: 'upcoming' },
-    { id: 5, name: 'Publish', icon: CircleDashed, status: 'upcoming' },
+    { id: 5, name: 'Publish', icon: Workflow, status: 'upcoming' },
   ];
   
   // Sample tasks for the dialog
@@ -93,7 +94,7 @@ const NoCodeUIFlow = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to="/no-code-ui">No-Code UI Studio</Link>
+                <Link to="/no-code-ui">Rule Scribe</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -115,7 +116,7 @@ const NoCodeUIFlow = () => {
                 <Save className="mr-2 h-4 w-4" />
                 Save
               </Button>
-              <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90 text-white">
+              <Button variant="default" size="sm" className="bg-purple-600 hover:bg-purple-700 text-white">
                 Publish changes
               </Button>
             </div>
@@ -129,7 +130,7 @@ const NoCodeUIFlow = () => {
               {steps.map((step, index) => (
                 <div key={step.id} className="flex flex-col items-center">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    step.status === 'current' ? 'bg-primary text-white' : 'bg-gray-100'
+                    step.status === 'current' ? 'bg-purple-600 text-white' : 'bg-gray-100'
                   }`}>
                     <step.icon className="h-5 w-5" />
                   </div>
@@ -158,6 +159,10 @@ const NoCodeUIFlow = () => {
               <Button variant="outline" size="sm">
                 <Download className="mr-2 h-4 w-4" />
                 Download YAML
+              </Button>
+              <Button variant="outline" size="sm">
+                <RotateCw className="mr-2 h-4 w-4" />
+                Auto Layout
               </Button>
             </div>
           </div>
@@ -191,20 +196,9 @@ const NoCodeUIFlow = () => {
                   </Button>
                 </div>
                 
-                <div className="mt-4 border rounded-lg p-10 h-[400px] flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                      <Plus className="h-8 w-8 text-gray-400" />
-                    </div>
-                    <h3 className="text-lg font-medium mb-2">Design Your Flow</h3>
-                    <p className="text-gray-500 max-w-md mx-auto mb-4">
-                      Add tasks to build your automation workflow. Connect them to create a rule.
-                    </p>
-                    <Button variant="outline" onClick={() => setDialogOpen(true)}>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Add a Task
-                    </Button>
-                  </div>
+                {/* Flow Editor Component */}
+                <div className="mt-4 border rounded-lg p-4 h-[600px]">
+                  <FlowEditor />
                 </div>
               </div>
               
@@ -286,7 +280,7 @@ outputs:
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span>2 / 5</span>
           </div>
-          <Button>
+          <Button className="bg-purple-600 hover:bg-purple-700">
             Next <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
           </Button>
         </div>
