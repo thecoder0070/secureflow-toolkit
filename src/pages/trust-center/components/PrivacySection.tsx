@@ -109,12 +109,12 @@ const PrivacySection = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { term: 'Lawfulness, Fairness, and Transparency', definition: 'We process data lawfully, fairly, and with complete transparency about how your data is used.' },
-              { term: 'Purpose Limitation', definition: 'We collect data for specified, explicit, and legitimate purposes and don't process it in a way incompatible with those purposes.' },
-              { term: 'Data Minimization', definition: 'We limit data collection to what's necessary for the specified purposes.' },
-              { term: 'Accuracy', definition: 'We take reasonable steps to ensure personal data is accurate and kept up to date.' },
-              { term: 'Storage Limitation', definition: 'We don't keep identifiable data longer than necessary for the specified purposes.' },
-              { term: 'Integrity and Confidentiality', definition: 'We process data securely using appropriate technical and organizational measures.' }
+              { term: "Lawfulness, Fairness, and Transparency", definition: "We process data lawfully, fairly, and with complete transparency about how your data is used." },
+              { term: "Purpose Limitation", definition: "We collect data for specified, explicit, and legitimate purposes and don't process it in a way incompatible with those purposes." },
+              { term: "Data Minimization", definition: "We limit data collection to what's necessary for the specified purposes." },
+              { term: "Accuracy", definition: "We take reasonable steps to ensure personal data is accurate and kept up to date." },
+              { term: "Storage Limitation", definition: "We don't keep identifiable data longer than necessary for the specified purposes." },
+              { term: "Integrity and Confidentiality", definition: "We process data securely using appropriate technical and organizational measures." }
             ].map((principle, index) => (
               <HoverCard key={index} openDelay={200}>
                 <HoverCardTrigger asChild>

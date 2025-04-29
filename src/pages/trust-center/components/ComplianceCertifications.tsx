@@ -9,7 +9,7 @@ const certifications = [
     name: 'SOC 2 Type II',
     description: 'Service Organization Control (SOC) 2 Type II report focusing on security, availability, processing integrity, confidentiality, and privacy.',
     icon: '🔒',
-    details: 'Our SOC 2 Type II audit provides an independent evaluation of our controls relevant to security, availability, and confidentiality of the systems used to process users' data.',
+    details: "Our SOC 2 Type II audit provides an independent evaluation of our controls relevant to security, availability, and confidentiality of the systems used to process users' data.",
   },
   {
     id: 'iso27001',
@@ -35,9 +35,9 @@ const certifications = [
   {
     id: 'ccpa',
     name: 'CCPA',
-    description: 'California Consumer Privacy Act compliance for California residents\' privacy rights.',
+    description: "California Consumer Privacy Act compliance for California residents' privacy rights.",
     icon: '🔐',
-    details: 'We respect California residents\' rights under CCPA and provide mechanisms for data access, deletion, and opt-out requests.',
+    details: "We respect California residents' rights under CCPA and provide mechanisms for data access, deletion, and opt-out requests.",
   }
 ];
 
