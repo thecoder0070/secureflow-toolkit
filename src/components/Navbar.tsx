@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Menu, X, MessageSquare, Users, BarChart2, AlertTriangle } from 'lucide-react';
+import { Menu, X, MessageSquare, Users, BarChart2, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,6 +37,7 @@ const Navbar = () => {
     { name: 'No Code UI', path: '/no-code-ui' },
     { name: 'Forms', path: '/forms' },
     { name: 'Rules Catalog', path: '/rules-catalog' },
+    { name: 'Trust Center', path: '/trust-center', icon: <ShieldCheck className="h-4 w-4 mr-1" /> },
     { name: 'Integrations', path: '/integrations' },
     { name: 'Manage Users', path: '/user-management', icon: <Users className="h-4 w-4 mr-1" /> },
     { name: 'Chat', path: '/chat', icon: <MessageSquare className="h-4 w-4 mr-1" /> },

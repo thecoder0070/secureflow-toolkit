@@ -19,6 +19,7 @@ import NewRulePage from "./pages/rules-catalog/new";
 import IntegrationsPage from "./pages/integrations";
 import UserManagementPage from "./pages/user-management";
 import ChatInterface from "./pages/chat";
+import TrustCenterPage from "./pages/trust-center";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/integrations" element={<IntegrationsPage />} />
           <Route path="/user-management" element={<UserManagementPage />} />
           <Route path="/chat" element={<ChatInterface />} />
+          <Route path="/trust-center" element={<TrustCenterPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
