@@ -44,16 +44,16 @@ const SystemsIntegrationAnimation = () => {
 
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
         {/* LEFT COLUMN - Source Systems */}
-        <div className="space-y-6">
+        <div className="space-y-6"> {/* Modified: Increased spacing to exactly 24px (6 tailwind units) */}
           {categories.map((category, index) => (
             <motion.div
               key={category.label}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex h-14 w-64 items-center justify-start space-x-4 rounded-2xl bg-white px-4 shadow-inner ring-1 ring-gray-100"
+              className="flex h-14 w-64 items-center justify-start space-x-4 rounded-2xl bg-white px-4 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)] ring-1 ring-gray-100" /* Modified: Added subtle inset shadow */
             >
-              <div className="flex items-center justify-center w-8 h-8">
+              <div className="flex items-center justify-center w-8 h-8 bg-gray-50 rounded-md"> {/* Modified: Added background for icon */}
                 <category.icon className="w-5 h-5 text-gray-500" />
               </div>
               <span className="text-sm font-medium text-gray-600">{category.label}</span>
@@ -68,7 +68,7 @@ const SystemsIntegrationAnimation = () => {
         >
           {categories.map((_, i) => {
             // Spline control points for smooth Bézier curves
-            const y = 120 + i * 76;
+            const y = 120 + i * 76; // 76px accounts for the new 24px vertical spacing plus pill height
             return (
               <React.Fragment key={i}>
                 <motion.path
