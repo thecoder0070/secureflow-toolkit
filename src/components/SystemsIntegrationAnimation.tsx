@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { LucideIcon, Shield, Cloud, Database, Link, Server, CircleCheck, GitMerge, GitBranch } from 'lucide-react';
+import { LucideIcon, Shield, Cloud, Database, Link, Server, CircleCheck, GitBranch } from 'lucide-react';
 
 // Define categories with icons
 interface Category {
@@ -90,6 +89,18 @@ const categoryLogos: Record<string, CompanyLogo[]> = {
     { name: "GitHub", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#github", bgColor: "bg-gray-100" }
   ]
 };
+
+// GRC platform logos
+const grcPlatformLogos = [
+  { name: 'Vanta', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-8 object-contain' },
+  { name: 'AuditBoard', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-8 object-contain' },
+  { name: 'ServiceNow', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-8 object-contain' },
+  { name: 'Drata', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-8 object-contain' },
+  { name: 'OneTrust', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-6 object-contain' },
+  { name: 'LogicGate', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-6 object-contain' },
+  { name: 'Archer', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-7 object-contain' },
+  { name: 'MetricStream', imgSrc: '/lovable-uploads/db36389e-aaf5-4847-abd6-dbfb01aeac02.png', className: 'h-8 object-contain' },
+];
 
 const SystemsIntegrationAnimation = () => {
   return (
@@ -260,30 +271,82 @@ const SystemsIntegrationAnimation = () => {
           </div>
         </div>
         
-        {/* Bottom text */}
+        {/* Bottom text with GRC platform logos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1 }}
-          className="text-center mt-4"
+          className="text-center mt-4 w-full"
         >
-          <h3 className="text-xl font-semibold text-indigo-600">Works With Your Current GRC Platform</h3>
-          <div className="flex flex-wrap items-center justify-center mt-4 gap-4">
-            {/* Platform logos */}
-            {['Vanta', 'AuditBoard', 'ServiceNow', 'Archer', 'Metricstream'].map((platform, i) => (
-              <motion.div
-                key={platform}
-                className="h-8 w-8 rounded-md bg-gray-100 flex items-center justify-center"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + i * 0.1, duration: 0.3 }}
-                title={platform}
-              >
-                <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                  <Shield className="w-3 h-3 text-gray-600" />
-                </div>
-              </motion.div>
-            ))}
+          <h3 className="text-xl font-semibold text-indigo-600 mb-6">Works With Your Current GRC Platform</h3>
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+            {/* GRC Platform logos */}
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[0].imgSrc} 
+                  alt="Vanta" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '0% 50%', clipPath: 'inset(0 75% 0 0)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[1].imgSrc} 
+                  alt="AuditBoard" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '14.2% 50%', clipPath: 'inset(0 66.5% 0 12.5%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[2].imgSrc} 
+                  alt="ServiceNow" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '35% 50%', clipPath: 'inset(0 56% 0 29%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[3].imgSrc} 
+                  alt="Drata" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '48% 50%', clipPath: 'inset(0 47% 0 42%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[4].imgSrc} 
+                  alt="OneTrust" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '58% 50%', clipPath: 'inset(0 37% 0 53%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[5].imgSrc} 
+                  alt="LogicGate" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '73% 50%', clipPath: 'inset(0 22% 0 66%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[6].imgSrc} 
+                  alt="Archer" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '85% 50%', clipPath: 'inset(0 10% 0 78%)' }} 
+                />
+              </div>
+              <div className="h-12 relative">
+                <img 
+                  src={grcPlatformLogos[7].imgSrc} 
+                  alt="MetricStream" 
+                  className="absolute left-0 top-0 h-10 object-contain" 
+                  style={{ objectPosition: '95% 50%', clipPath: 'inset(0 0 0 89%)' }} 
+                />
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
