@@ -1,8 +1,8 @@
 
 import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/animations/FadeIn';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { ArrowRight, ShieldCheck, Lock, BarChart3 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import SystemsIntegrationAnimation from './SystemsIntegrationAnimation';
 
 const Hero = () => {
   return (
@@ -33,8 +33,8 @@ const Hero = () => {
 
             <FadeIn delay={500} duration={700}>
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl">
-                Meet security requirements effortlessly with our intuitive compliance platform. 
-                Streamline assessments, track progress, and showcase your security posture. 
+                Connect your business systems once and meet security requirements effortlessly with our 
+                intuitive compliance platform. Streamline assessments, track progress, and showcase your security posture.
               </p>
             </FadeIn>
 
@@ -71,54 +71,7 @@ const Hero = () => {
           <div className="relative">
             <FadeIn delay={300} direction="left">
               <div className="relative">
-                <GlassCard className="relative z-10 p-6 max-w-[600px] mx-auto animate-float">
-                  <div className="aspect-[16/10] rounded-lg bg-gray-50 dark:bg-gray-800 mb-5 overflow-hidden">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-full bg-green-400"></div>
-                        <span className="font-medium">Compliance Status: 87% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="h-5 w-5 text-green-500" />
-                        <span className="font-medium">SOC 2</span>
-                      </div>
-                      <div className="text-sm font-medium text-green-500">92% Complete</div>
-                    </div>
-                    
-                    <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full bg-green-500 rounded-full" style={{ width: '92%' }}></div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="flex items-center gap-2">
-                        <Lock className="h-5 w-5 text-blue-500" />
-                        <span className="font-medium">GDPR</span>
-                      </div>
-                      <div className="text-sm font-medium text-blue-500">78% Complete</div>
-                    </div>
-                    
-                    <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full bg-blue-500 rounded-full" style={{ width: '78%' }}></div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="flex items-center gap-2">
-                        <BarChart3 className="h-5 w-5 text-purple-500" />
-                        <span className="font-medium">ISO 27001</span>
-                      </div>
-                      <div className="text-sm font-medium text-purple-500">85% Complete</div>
-                    </div>
-                    
-                    <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full bg-purple-500 rounded-full" style={{ width: '85%' }}></div>
-                    </div>
-                  </div>
-                </GlassCard>
+                <SystemsIntegrationAnimation />
               </div>
             </FadeIn>
           </div>
