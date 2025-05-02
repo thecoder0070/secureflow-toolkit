@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { LucideIcon, Shield, Cloud, Database, Link, Server, CircleCheck, GitMerge, GitBranch, Jira } from 'lucide-react';
+import { LucideIcon, Shield, Cloud, Database, Link, Server, CircleCheck, GitMerge, GitBranch } from 'lucide-react';
 
 // Define categories with icons
 interface Category {
@@ -202,7 +201,7 @@ const SystemsIntegrationAnimation = () => {
                       <GitMerge className="w-3 h-3 text-blue-500" />
                     </div>
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                      <Jira className="w-3 h-3 text-green-500" />
+                      <Shield className="w-3 h-3 text-green-500" />
                     </div>
                   </div>
                 </div>
