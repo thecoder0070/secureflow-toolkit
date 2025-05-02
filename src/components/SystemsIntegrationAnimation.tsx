@@ -1,45 +1,44 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Server, Database, Cloud, FileImage, Network, Link } from 'lucide-react';
+import { LucideIcon, FileText, Users, Laptop, FolderOpen, Building, TicketCheck } from 'lucide-react';
 
-// Define categories with icons similar to Merge's design
-const categories = [
+// Define categories with icons
+interface Category {
+  label: string;
+  icon: LucideIcon;
+}
+
+const categories: Category[] = [
   { 
-    label: "ERP Systems", 
-    icon: <Server className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" // Using white background for all pills
+    label: "Accounting", 
+    icon: FileText
+  },
+  { 
+    label: "ATS", 
+    icon: Users
+  },
+  { 
+    label: "CRM", 
+    icon: Laptop
+  },
+  { 
+    label: "File storage", 
+    icon: FolderOpen
   },
   { 
     label: "HRIS", 
-    icon: <Database className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" 
-  },
-  { 
-    label: "Cloud Storage", 
-    icon: <Cloud className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" 
-  },
-  { 
-    label: "CRM Systems", 
-    icon: <FileImage className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" 
-  },
-  { 
-    label: "Security Tools", 
-    icon: <Network className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" 
+    icon: Building
   },
   { 
     label: "Ticketing", 
-    icon: <Link className="w-5 h-5 text-gray-500" />,
-    color: "bg-white" 
+    icon: TicketCheck
   },
 ];
 
 const SystemsIntegrationAnimation = () => {
   return (
-    <div className="relative w-full min-h-[500px] overflow-hidden rounded-lg bg-gradient-to-br from-white to-gray-50 p-8 md:p-12 shadow-sm ring-1 ring-gray-100">
+    <div className="relative w-full overflow-hidden rounded-lg bg-gradient-to-br from-white to-gray-50 p-8 md:p-12 shadow-sm ring-1 ring-gray-100">
       {/* Diagonal line pattern for texture (very subtle) */}
       <div className="absolute inset-0 bg-[radial-gradient(#222_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]"></div>
 
@@ -55,7 +54,7 @@ const SystemsIntegrationAnimation = () => {
               className="flex h-14 w-64 items-center justify-start space-x-4 rounded-2xl bg-white px-4 shadow-inner ring-1 ring-gray-100"
             >
               <div className="flex items-center justify-center w-8 h-8">
-                {category.icon}
+                <category.icon className="w-5 h-5 text-gray-500" />
               </div>
               <span className="text-sm font-medium text-gray-600">{category.label}</span>
             </motion.div>
@@ -68,7 +67,7 @@ const SystemsIntegrationAnimation = () => {
           className="pointer-events-none absolute left-56 md:left-60 top-8 h-[80%] w-auto hidden md:block"
         >
           {categories.map((_, i) => {
-            // Crude spline control points matching Merge design
+            // Spline control points for smooth Bézier curves
             const y = 120 + i * 76;
             return (
               <React.Fragment key={i}>
@@ -105,7 +104,7 @@ const SystemsIntegrationAnimation = () => {
         >
           <div className="text-gray-800 text-center">
             <div className="font-bold text-2xl">ComplianceCow</div>
-            <div className="text-sm opacity-80">Security Middleware</div>
+            <div className="text-sm opacity-80">Integration Platform</div>
           </div>
           
           {/* Orbital rings (subtle decoration) */}
