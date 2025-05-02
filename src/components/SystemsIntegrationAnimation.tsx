@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LucideIcon, Shield, Cloud, Database, Link, Server, CircleCheck, GitMerge, GitBranch } from 'lucide-react';
@@ -49,6 +50,47 @@ const categories: Category[] = [
   },
 ];
 
+// Company logo icons for each category
+interface CompanyLogo {
+  name: string;
+  imageUrl: string;
+  bgColor?: string;
+}
+
+const categoryLogos: Record<string, CompanyLogo[]> = {
+  "Controls": [
+    { name: "Shield", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#shield", bgColor: "bg-blue-100" },
+    { name: "Cloud", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#cloud", bgColor: "bg-cyan-100" },
+    { name: "PCI", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#pci", bgColor: "bg-green-100" },
+    { name: "ISO", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#iso", bgColor: "bg-yellow-100" },
+    { name: "SOC2", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#soc2", bgColor: "bg-purple-100" }
+  ],
+  "Systems": [
+    { name: "AWS", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#aws", bgColor: "bg-orange-100" },
+    { name: "Google Cloud", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#gc", bgColor: "bg-blue-100" },
+    { name: "Azure", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#azure", bgColor: "bg-indigo-100" }
+  ],
+  "Collaboration": [
+    { name: "Microsoft", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#msft", bgColor: "bg-blue-100" },
+    { name: "Google", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#google", bgColor: "bg-green-100" },
+    { name: "Slack", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#slack", bgColor: "bg-purple-100" }
+  ],
+  "Consumption": [
+    { name: "Data", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#data", bgColor: "bg-red-100" },
+    { name: "Tableau", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#tableau", bgColor: "bg-blue-100" },
+    { name: "PowerBI", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#powerbi", bgColor: "bg-yellow-100" }
+  ],
+  "Reporting": [
+    { name: "Google Data Studio", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#gds", bgColor: "bg-blue-100" },
+    { name: "Looker", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#looker", bgColor: "bg-green-100" }
+  ],
+  "Remediation": [
+    { name: "ServiceNow", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#servicenow", bgColor: "bg-green-100" },
+    { name: "Jira", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#jira", bgColor: "bg-blue-100" },
+    { name: "GitHub", imageUrl: "/lovable-uploads/5b20eacc-870a-4af9-ad8a-0ab9ce9e189f.png#github", bgColor: "bg-gray-100" }
+  ]
+};
+
 const SystemsIntegrationAnimation = () => {
   return (
     <div className="relative w-full overflow-hidden rounded-lg bg-gradient-to-br from-white to-gray-50 p-8 md:p-12 shadow-sm ring-1 ring-gray-100">
@@ -84,16 +126,20 @@ const SystemsIntegrationAnimation = () => {
                   <span className="text-sm font-medium text-indigo-600">{category.label}</span>
                 </div>
                 <div className="mt-3 pl-4 space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Shield className="w-3 h-3 text-blue-500" />
-                    </div>
-                    <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center">
-                      <Cloud className="w-3 h-3 text-cyan-500" />
-                    </div>
-                    <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center">
-                      <Server className="w-3 h-3 text-gray-500" />
-                    </div>
+                  {/* Company logos for this category */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    {categoryLogos[category.label]?.map((logo, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`w-7 h-7 ${logo.bgColor || 'bg-gray-100'} rounded-full flex items-center justify-center shadow-sm`}
+                        title={logo.name}
+                      >
+                        <div className="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center">
+                          {/* Using placeholder icons since we don't have the actual images */}
+                          {category.icon && <category.icon className="w-3 h-3 text-gray-600" />}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -132,7 +178,7 @@ const SystemsIntegrationAnimation = () => {
             >
               <div className="flex flex-col items-center text-center px-4">
                 <div className="mb-4">
-                  {/* ComplianceCow Logo - Simplified version */}
+                  {/* ComplianceCow Logo - Purple cow with horns and sunglasses */}
                   <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center">
                     <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 8L8 12M12 8L16 12M12 8V16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -193,16 +239,20 @@ const SystemsIntegrationAnimation = () => {
                   <span className="text-sm font-medium text-indigo-600">{category.label}</span>
                 </div>
                 <div className="mt-3 pl-4 space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
-                      <CircleCheck className="w-3 h-3 text-orange-500" />
-                    </div>
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                      <GitMerge className="w-3 h-3 text-blue-500" />
-                    </div>
-                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                      <Shield className="w-3 h-3 text-green-500" />
-                    </div>
+                  {/* Company logos for this category */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    {categoryLogos[category.label]?.map((logo, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`w-7 h-7 ${logo.bgColor || 'bg-gray-100'} rounded-full flex items-center justify-center shadow-sm`}
+                        title={logo.name}
+                      >
+                        <div className="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center">
+                          {/* Using placeholder icons since we don't have the actual images */}
+                          {category.icon && <category.icon className="w-3 h-3 text-gray-600" />}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -218,13 +268,21 @@ const SystemsIntegrationAnimation = () => {
           className="text-center mt-4"
         >
           <h3 className="text-xl font-semibold text-indigo-600">Works With Your Current GRC Platform</h3>
-          <div className="flex items-center justify-center mt-4 space-x-6">
-            {Array(5).fill(0).map((_, i) => (
-              <div 
-                key={i} 
-                className="w-10 h-10 bg-gray-100 rounded-md animate-pulse"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
+          <div className="flex flex-wrap items-center justify-center mt-4 gap-4">
+            {/* Platform logos */}
+            {['Vanta', 'AuditBoard', 'ServiceNow', 'Archer', 'Metricstream'].map((platform, i) => (
+              <motion.div
+                key={platform}
+                className="h-8 w-8 rounded-md bg-gray-100 flex items-center justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 + i * 0.1, duration: 0.3 }}
+                title={platform}
+              >
+                <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+                  <Shield className="w-3 h-3 text-gray-600" />
+                </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
