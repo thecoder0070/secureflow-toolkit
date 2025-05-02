@@ -69,10 +69,8 @@ const Hero = () => {
           </div>
 
           <div className="relative">
-            <FadeIn delay={300} direction="left">
-              <div className="relative">
-                <SystemsIntegrationAnimation />
-              </div>
+            <FadeIn delay={300} direction="left" distance={30}>
+              <SystemsIntegrationAnimation />
             </FadeIn>
           </div>
         </div>
